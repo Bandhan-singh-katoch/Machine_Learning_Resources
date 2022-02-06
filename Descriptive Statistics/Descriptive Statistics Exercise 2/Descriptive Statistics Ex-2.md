@@ -1,0 +1,2072 @@
+```python
+import pandas as pd
+from matplotlib import pyplot as plt
+```
+
+
+```python
+# a. Import the file to Python
+mydata = pd.read_excel("Z:\Machine Learning\College ML subject\Descriptive Statistics Exercise 2\CPU_Data.xlsx")
+mydata
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MYCT</th>
+      <th>MMIN</th>
+      <th>MMAX</th>
+      <th>CACH</th>
+      <th>PRP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>125.0</td>
+      <td>256.0</td>
+      <td>6000.0</td>
+      <td>256.0</td>
+      <td>198.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>29.0</td>
+      <td>8000.0</td>
+      <td>32000.0</td>
+      <td>32.0</td>
+      <td>269.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29.0</td>
+      <td>8000.0</td>
+      <td>32000.0</td>
+      <td>32.0</td>
+      <td>220.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>29.0</td>
+      <td>8000.0</td>
+      <td>32000.0</td>
+      <td>32.0</td>
+      <td>172.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>29.0</td>
+      <td>8000.0</td>
+      <td>16000.0</td>
+      <td>32.0</td>
+      <td>132.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>124.0</td>
+      <td>1000.0</td>
+      <td>8000.0</td>
+      <td>0.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <th>205</th>
+      <td>98.0</td>
+      <td>1000.0</td>
+      <td>8000.0</td>
+      <td>32.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>206</th>
+      <td>125.0</td>
+      <td>2000.0</td>
+      <td>8000.0</td>
+      <td>0.0</td>
+      <td>52.0</td>
+    </tr>
+    <tr>
+      <th>207</th>
+      <td>480.0</td>
+      <td>512.0</td>
+      <td>8000.0</td>
+      <td>32.0</td>
+      <td>67.0</td>
+    </tr>
+    <tr>
+      <th>208</th>
+      <td>480.0</td>
+      <td>1000.0</td>
+      <td>4000.0</td>
+      <td>0.0</td>
+      <td>45.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>209 rows × 5 columns</p>
+</div>
+
+
+
+
+```python
+# b. Compute descriptive summary of variable PRP
+prp = mydata.PRP
+prp.describe()
+```
+
+
+
+
+    count     209.000000
+    mean      105.622010
+    std       160.830733
+    min         6.000000
+    25%        27.000000
+    50%        50.000000
+    75%       113.000000
+    max      1150.000000
+    Name: PRP, dtype: float64
+
+
+
+
+```python
+# c. Check whether the average PRP varies with MMIN? 
+prp.groupby(mydata.MMIN).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MMIN</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>64.0</th>
+      <td>1.0</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>96.0</th>
+      <td>1.0</td>
+      <td>6.000000</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>6.00</td>
+      <td>6.0</td>
+      <td>6.00</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>23.000000</td>
+      <td>NaN</td>
+      <td>23.0</td>
+      <td>23.00</td>
+      <td>23.0</td>
+      <td>23.00</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>192.0</th>
+      <td>1.0</td>
+      <td>36.000000</td>
+      <td>NaN</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>256.0</th>
+      <td>13.0</td>
+      <td>35.230769</td>
+      <td>49.261469</td>
+      <td>12.0</td>
+      <td>17.00</td>
+      <td>22.0</td>
+      <td>27.00</td>
+      <td>198.0</td>
+    </tr>
+    <tr>
+      <th>262.0</th>
+      <td>2.0</td>
+      <td>15.000000</td>
+      <td>4.242641</td>
+      <td>12.0</td>
+      <td>13.50</td>
+      <td>15.0</td>
+      <td>16.50</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>384.0</th>
+      <td>2.0</td>
+      <td>38.500000</td>
+      <td>20.506097</td>
+      <td>24.0</td>
+      <td>31.25</td>
+      <td>38.5</td>
+      <td>45.75</td>
+      <td>53.0</td>
+    </tr>
+    <tr>
+      <th>500.0</th>
+      <td>1.0</td>
+      <td>20.000000</td>
+      <td>NaN</td>
+      <td>20.0</td>
+      <td>20.00</td>
+      <td>20.0</td>
+      <td>20.00</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>512.0</th>
+      <td>22.0</td>
+      <td>34.272727</td>
+      <td>20.642494</td>
+      <td>6.0</td>
+      <td>18.75</td>
+      <td>31.0</td>
+      <td>43.75</td>
+      <td>77.0</td>
+    </tr>
+    <tr>
+      <th>524.0</th>
+      <td>1.0</td>
+      <td>19.000000</td>
+      <td>NaN</td>
+      <td>19.0</td>
+      <td>19.00</td>
+      <td>19.0</td>
+      <td>19.00</td>
+      <td>19.0</td>
+    </tr>
+    <tr>
+      <th>768.0</th>
+      <td>10.0</td>
+      <td>33.800000</td>
+      <td>22.807406</td>
+      <td>12.0</td>
+      <td>16.50</td>
+      <td>28.0</td>
+      <td>44.75</td>
+      <td>84.0</td>
+    </tr>
+    <tr>
+      <th>1000.0</th>
+      <td>38.0</td>
+      <td>35.868421</td>
+      <td>23.920105</td>
+      <td>8.0</td>
+      <td>22.00</td>
+      <td>30.5</td>
+      <td>41.00</td>
+      <td>138.0</td>
+    </tr>
+    <tr>
+      <th>1310.0</th>
+      <td>2.0</td>
+      <td>321.000000</td>
+      <td>66.468037</td>
+      <td>274.0</td>
+      <td>297.50</td>
+      <td>321.0</td>
+      <td>344.50</td>
+      <td>368.0</td>
+    </tr>
+    <tr>
+      <th>1500.0</th>
+      <td>1.0</td>
+      <td>30.000000</td>
+      <td>NaN</td>
+      <td>30.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>2000.0</th>
+      <td>54.0</td>
+      <td>74.148148</td>
+      <td>58.126864</td>
+      <td>21.0</td>
+      <td>40.00</td>
+      <td>57.0</td>
+      <td>75.50</td>
+      <td>307.0</td>
+    </tr>
+    <tr>
+      <th>2300.0</th>
+      <td>1.0</td>
+      <td>61.000000</td>
+      <td>NaN</td>
+      <td>61.0</td>
+      <td>61.00</td>
+      <td>61.0</td>
+      <td>61.00</td>
+      <td>61.0</td>
+    </tr>
+    <tr>
+      <th>2620.0</th>
+      <td>2.0</td>
+      <td>47.500000</td>
+      <td>21.920310</td>
+      <td>32.0</td>
+      <td>39.75</td>
+      <td>47.5</td>
+      <td>55.25</td>
+      <td>63.0</td>
+    </tr>
+    <tr>
+      <th>3000.0</th>
+      <td>1.0</td>
+      <td>64.000000</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>64.00</td>
+      <td>64.0</td>
+      <td>64.00</td>
+      <td>64.0</td>
+    </tr>
+    <tr>
+      <th>3100.0</th>
+      <td>2.0</td>
+      <td>54.500000</td>
+      <td>30.405592</td>
+      <td>33.0</td>
+      <td>43.75</td>
+      <td>54.5</td>
+      <td>65.25</td>
+      <td>76.0</td>
+    </tr>
+    <tr>
+      <th>4000.0</th>
+      <td>22.0</td>
+      <td>122.772727</td>
+      <td>83.850168</td>
+      <td>32.0</td>
+      <td>68.25</td>
+      <td>112.0</td>
+      <td>136.75</td>
+      <td>397.0</td>
+    </tr>
+    <tr>
+      <th>5000.0</th>
+      <td>1.0</td>
+      <td>120.000000</td>
+      <td>NaN</td>
+      <td>120.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+    </tr>
+    <tr>
+      <th>5240.0</th>
+      <td>2.0</td>
+      <td>157.000000</td>
+      <td>72.124892</td>
+      <td>106.0</td>
+      <td>131.50</td>
+      <td>157.0</td>
+      <td>182.50</td>
+      <td>208.0</td>
+    </tr>
+    <tr>
+      <th>8000.0</th>
+      <td>20.0</td>
+      <td>310.750000</td>
+      <td>262.864759</td>
+      <td>100.0</td>
+      <td>172.75</td>
+      <td>234.0</td>
+      <td>320.00</td>
+      <td>1150.0</td>
+    </tr>
+    <tr>
+      <th>16000.0</th>
+      <td>7.0</td>
+      <td>491.714286</td>
+      <td>80.078533</td>
+      <td>367.0</td>
+      <td>465.00</td>
+      <td>489.0</td>
+      <td>510.00</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>32000.0</th>
+      <td>1.0</td>
+      <td>1144.000000</td>
+      <td>NaN</td>
+      <td>1144.0</td>
+      <td>1144.00</td>
+      <td>1144.0</td>
+      <td>1144.00</td>
+      <td>1144.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# d. Check whether the average PRP with MMAX? 
+prp.groupby(mydata.MMAX).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MMAX</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>64.0</th>
+      <td>1.0</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>512.0</th>
+      <td>2.0</td>
+      <td>12.000000</td>
+      <td>8.485281</td>
+      <td>6.0</td>
+      <td>9.00</td>
+      <td>12.0</td>
+      <td>15.00</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>768.0</th>
+      <td>1.0</td>
+      <td>36.000000</td>
+      <td>NaN</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>1000.0</th>
+      <td>7.0</td>
+      <td>14.428571</td>
+      <td>10.113640</td>
+      <td>6.0</td>
+      <td>9.50</td>
+      <td>11.0</td>
+      <td>14.50</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>1500.0</th>
+      <td>1.0</td>
+      <td>7.000000</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>7.00</td>
+      <td>7.0</td>
+      <td>7.00</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>2000.0</th>
+      <td>17.0</td>
+      <td>23.411765</td>
+      <td>13.219582</td>
+      <td>11.0</td>
+      <td>16.00</td>
+      <td>20.0</td>
+      <td>25.00</td>
+      <td>69.0</td>
+    </tr>
+    <tr>
+      <th>2620.0</th>
+      <td>2.0</td>
+      <td>321.000000</td>
+      <td>66.468037</td>
+      <td>274.0</td>
+      <td>297.50</td>
+      <td>321.0</td>
+      <td>344.50</td>
+      <td>368.0</td>
+    </tr>
+    <tr>
+      <th>3000.0</th>
+      <td>5.0</td>
+      <td>32.200000</td>
+      <td>10.917875</td>
+      <td>16.0</td>
+      <td>27.00</td>
+      <td>36.0</td>
+      <td>38.00</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>3500.0</th>
+      <td>1.0</td>
+      <td>40.000000</td>
+      <td>NaN</td>
+      <td>40.0</td>
+      <td>40.00</td>
+      <td>40.0</td>
+      <td>40.00</td>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>4000.0</th>
+      <td>33.0</td>
+      <td>29.000000</td>
+      <td>9.013878</td>
+      <td>12.0</td>
+      <td>22.00</td>
+      <td>29.0</td>
+      <td>35.00</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>4500.0</th>
+      <td>1.0</td>
+      <td>45.000000</td>
+      <td>NaN</td>
+      <td>45.0</td>
+      <td>45.00</td>
+      <td>45.0</td>
+      <td>45.00</td>
+      <td>45.0</td>
+    </tr>
+    <tr>
+      <th>5000.0</th>
+      <td>5.0</td>
+      <td>54.400000</td>
+      <td>43.142786</td>
+      <td>20.0</td>
+      <td>27.00</td>
+      <td>28.0</td>
+      <td>77.00</td>
+      <td>120.0</td>
+    </tr>
+    <tr>
+      <th>6000.0</th>
+      <td>6.0</td>
+      <td>58.833333</td>
+      <td>68.715112</td>
+      <td>21.0</td>
+      <td>25.50</td>
+      <td>33.0</td>
+      <td>42.00</td>
+      <td>198.0</td>
+    </tr>
+    <tr>
+      <th>6200.0</th>
+      <td>3.0</td>
+      <td>56.666667</td>
+      <td>21.825062</td>
+      <td>33.0</td>
+      <td>47.00</td>
+      <td>61.0</td>
+      <td>68.50</td>
+      <td>76.0</td>
+    </tr>
+    <tr>
+      <th>6300.0</th>
+      <td>1.0</td>
+      <td>30.000000</td>
+      <td>NaN</td>
+      <td>30.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>8000.0</th>
+      <td>43.0</td>
+      <td>52.976744</td>
+      <td>28.690042</td>
+      <td>12.0</td>
+      <td>33.00</td>
+      <td>50.0</td>
+      <td>65.00</td>
+      <td>144.0</td>
+    </tr>
+    <tr>
+      <th>10480.0</th>
+      <td>2.0</td>
+      <td>47.500000</td>
+      <td>21.920310</td>
+      <td>32.0</td>
+      <td>39.75</td>
+      <td>47.5</td>
+      <td>55.25</td>
+      <td>63.0</td>
+    </tr>
+    <tr>
+      <th>12000.0</th>
+      <td>10.0</td>
+      <td>66.400000</td>
+      <td>21.014281</td>
+      <td>42.0</td>
+      <td>50.75</td>
+      <td>63.0</td>
+      <td>74.25</td>
+      <td>113.0</td>
+    </tr>
+    <tr>
+      <th>16000.0</th>
+      <td>35.0</td>
+      <td>105.457143</td>
+      <td>56.708409</td>
+      <td>35.0</td>
+      <td>62.50</td>
+      <td>93.0</td>
+      <td>137.00</td>
+      <td>259.0</td>
+    </tr>
+    <tr>
+      <th>20970.0</th>
+      <td>2.0</td>
+      <td>157.000000</td>
+      <td>72.124892</td>
+      <td>106.0</td>
+      <td>131.50</td>
+      <td>157.0</td>
+      <td>182.50</td>
+      <td>208.0</td>
+    </tr>
+    <tr>
+      <th>24000.0</th>
+      <td>4.0</td>
+      <td>191.000000</td>
+      <td>43.089055</td>
+      <td>140.0</td>
+      <td>164.75</td>
+      <td>193.5</td>
+      <td>219.75</td>
+      <td>237.0</td>
+    </tr>
+    <tr>
+      <th>32000.0</th>
+      <td>23.0</td>
+      <td>312.086957</td>
+      <td>124.609905</td>
+      <td>114.0</td>
+      <td>214.00</td>
+      <td>307.0</td>
+      <td>401.00</td>
+      <td>510.0</td>
+    </tr>
+    <tr>
+      <th>64000.0</th>
+      <td>4.0</td>
+      <td>961.250000</td>
+      <td>242.865361</td>
+      <td>636.0</td>
+      <td>845.25</td>
+      <td>1029.5</td>
+      <td>1145.50</td>
+      <td>1150.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP with CACH? 
+prp.groupby(mydata.CACH).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>69.0</td>
+      <td>32.391304</td>
+      <td>37.832532</td>
+      <td>6.0</td>
+      <td>16.00</td>
+      <td>24.0</td>
+      <td>35.00</td>
+      <td>277.0</td>
+    </tr>
+    <tr>
+      <th>1.0</th>
+      <td>2.0</td>
+      <td>91.000000</td>
+      <td>57.982756</td>
+      <td>50.0</td>
+      <td>70.50</td>
+      <td>91.0</td>
+      <td>111.50</td>
+      <td>132.0</td>
+    </tr>
+    <tr>
+      <th>2.0</th>
+      <td>4.0</td>
+      <td>31.500000</td>
+      <td>6.608076</td>
+      <td>24.0</td>
+      <td>28.50</td>
+      <td>31.0</td>
+      <td>34.00</td>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>8.0</td>
+      <td>43.500000</td>
+      <td>20.818947</td>
+      <td>18.0</td>
+      <td>27.00</td>
+      <td>40.0</td>
+      <td>54.75</td>
+      <td>77.0</td>
+    </tr>
+    <tr>
+      <th>6.0</th>
+      <td>5.0</td>
+      <td>53.400000</td>
+      <td>18.297541</td>
+      <td>36.0</td>
+      <td>44.00</td>
+      <td>50.0</td>
+      <td>53.00</td>
+      <td>84.0</td>
+    </tr>
+    <tr>
+      <th>8.0</th>
+      <td>31.0</td>
+      <td>41.032258</td>
+      <td>20.870208</td>
+      <td>6.0</td>
+      <td>24.00</td>
+      <td>38.0</td>
+      <td>54.00</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>9.0</th>
+      <td>2.0</td>
+      <td>72.000000</td>
+      <td>0.000000</td>
+      <td>72.0</td>
+      <td>72.00</td>
+      <td>72.0</td>
+      <td>72.00</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>12.0</th>
+      <td>1.0</td>
+      <td>45.000000</td>
+      <td>NaN</td>
+      <td>45.0</td>
+      <td>45.00</td>
+      <td>45.0</td>
+      <td>45.00</td>
+      <td>45.0</td>
+    </tr>
+    <tr>
+      <th>16.0</th>
+      <td>14.0</td>
+      <td>65.714286</td>
+      <td>28.217367</td>
+      <td>26.0</td>
+      <td>52.00</td>
+      <td>63.0</td>
+      <td>69.75</td>
+      <td>138.0</td>
+    </tr>
+    <tr>
+      <th>24.0</th>
+      <td>7.0</td>
+      <td>63.000000</td>
+      <td>29.871949</td>
+      <td>26.0</td>
+      <td>43.00</td>
+      <td>65.0</td>
+      <td>75.00</td>
+      <td>114.0</td>
+    </tr>
+    <tr>
+      <th>30.0</th>
+      <td>4.0</td>
+      <td>102.250000</td>
+      <td>76.752307</td>
+      <td>32.0</td>
+      <td>55.25</td>
+      <td>84.5</td>
+      <td>131.50</td>
+      <td>208.0</td>
+    </tr>
+    <tr>
+      <th>32.0</th>
+      <td>23.0</td>
+      <td>129.000000</td>
+      <td>62.559790</td>
+      <td>46.0</td>
+      <td>68.50</td>
+      <td>130.0</td>
+      <td>172.50</td>
+      <td>269.0</td>
+    </tr>
+    <tr>
+      <th>48.0</th>
+      <td>2.0</td>
+      <td>172.000000</td>
+      <td>50.911688</td>
+      <td>136.0</td>
+      <td>154.00</td>
+      <td>172.0</td>
+      <td>190.00</td>
+      <td>208.0</td>
+    </tr>
+    <tr>
+      <th>64.0</th>
+      <td>20.0</td>
+      <td>261.800000</td>
+      <td>164.487274</td>
+      <td>41.0</td>
+      <td>135.00</td>
+      <td>242.5</td>
+      <td>367.75</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>65.0</th>
+      <td>2.0</td>
+      <td>115.000000</td>
+      <td>32.526912</td>
+      <td>92.0</td>
+      <td>103.50</td>
+      <td>115.0</td>
+      <td>126.50</td>
+      <td>138.0</td>
+    </tr>
+    <tr>
+      <th>96.0</th>
+      <td>1.0</td>
+      <td>915.000000</td>
+      <td>NaN</td>
+      <td>915.0</td>
+      <td>915.00</td>
+      <td>915.0</td>
+      <td>915.00</td>
+      <td>915.0</td>
+    </tr>
+    <tr>
+      <th>112.0</th>
+      <td>2.0</td>
+      <td>352.000000</td>
+      <td>63.639610</td>
+      <td>307.0</td>
+      <td>329.50</td>
+      <td>352.0</td>
+      <td>374.50</td>
+      <td>397.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <td>6.0</td>
+      <td>613.333333</td>
+      <td>426.689426</td>
+      <td>212.0</td>
+      <td>295.50</td>
+      <td>457.5</td>
+      <td>985.50</td>
+      <td>1150.0</td>
+    </tr>
+    <tr>
+      <th>131.0</th>
+      <td>2.0</td>
+      <td>321.000000</td>
+      <td>66.468037</td>
+      <td>274.0</td>
+      <td>297.50</td>
+      <td>321.0</td>
+      <td>344.50</td>
+      <td>368.0</td>
+    </tr>
+    <tr>
+      <th>142.0</th>
+      <td>1.0</td>
+      <td>120.000000</td>
+      <td>NaN</td>
+      <td>120.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+    </tr>
+    <tr>
+      <th>160.0</th>
+      <td>1.0</td>
+      <td>140.000000</td>
+      <td>NaN</td>
+      <td>140.0</td>
+      <td>140.00</td>
+      <td>140.0</td>
+      <td>140.00</td>
+      <td>140.0</td>
+    </tr>
+    <tr>
+      <th>256.0</th>
+      <td>2.0</td>
+      <td>354.000000</td>
+      <td>220.617316</td>
+      <td>198.0</td>
+      <td>276.00</td>
+      <td>354.0</td>
+      <td>432.00</td>
+      <td>510.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP varies with MMIN & CACH? 
+prp.groupby([mydata.MMIN, mydata.CACH]).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MMIN</th>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>64.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>96.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>6.00</td>
+      <td>6.0</td>
+      <td>6.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>23.0</td>
+      <td>NaN</td>
+      <td>23.0</td>
+      <td>23.00</td>
+      <td>23.0</td>
+      <td>23.0</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>192.0</th>
+      <th>6.0</th>
+      <td>1.0</td>
+      <td>36.0</td>
+      <td>NaN</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+      <td>36.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>256.0</th>
+      <th>0.0</th>
+      <td>10.0</td>
+      <td>20.6</td>
+      <td>6.239658</td>
+      <td>12.0</td>
+      <td>16.25</td>
+      <td>21.0</td>
+      <td>23.5</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8000.0</th>
+      <th>160.0</th>
+      <td>1.0</td>
+      <td>140.0</td>
+      <td>NaN</td>
+      <td>140.0</td>
+      <td>140.00</td>
+      <td>140.0</td>
+      <td>140.0</td>
+      <td>140.0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">16000.0</th>
+      <th>64.0</th>
+      <td>5.0</td>
+      <td>484.4</td>
+      <td>96.875177</td>
+      <td>367.0</td>
+      <td>465.00</td>
+      <td>465.0</td>
+      <td>489.0</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>510.0</td>
+      <td>NaN</td>
+      <td>510.0</td>
+      <td>510.00</td>
+      <td>510.0</td>
+      <td>510.0</td>
+      <td>510.0</td>
+    </tr>
+    <tr>
+      <th>256.0</th>
+      <td>1.0</td>
+      <td>510.0</td>
+      <td>NaN</td>
+      <td>510.0</td>
+      <td>510.00</td>
+      <td>510.0</td>
+      <td>510.0</td>
+      <td>510.0</td>
+    </tr>
+    <tr>
+      <th>32000.0</th>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>1144.0</td>
+      <td>NaN</td>
+      <td>1144.0</td>
+      <td>1144.00</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>70 rows × 8 columns</p>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP varies with MMAX & CACH? 
+prp.groupby([mydata.MMAX, mydata.CACH]).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MMAX</th>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>64.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>10.000000</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+      <td>10.00</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">512.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>6.000000</td>
+      <td>NaN</td>
+      <td>6.0</td>
+      <td>6.00</td>
+      <td>6.0</td>
+      <td>6.00</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>18.000000</td>
+      <td>NaN</td>
+      <td>18.0</td>
+      <td>18.00</td>
+      <td>18.0</td>
+      <td>18.00</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>768.0</th>
+      <th>6.0</th>
+      <td>1.0</td>
+      <td>36.000000</td>
+      <td>NaN</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+      <td>36.00</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>1000.0</th>
+      <th>0.0</th>
+      <td>6.0</td>
+      <td>15.833333</td>
+      <td>10.303721</td>
+      <td>8.0</td>
+      <td>11.00</td>
+      <td>11.5</td>
+      <td>15.75</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">32000.0</th>
+      <th>128.0</th>
+      <td>2.0</td>
+      <td>457.500000</td>
+      <td>74.246212</td>
+      <td>405.0</td>
+      <td>431.25</td>
+      <td>457.5</td>
+      <td>483.75</td>
+      <td>510.0</td>
+    </tr>
+    <tr>
+      <th>256.0</th>
+      <td>1.0</td>
+      <td>510.000000</td>
+      <td>NaN</td>
+      <td>510.0</td>
+      <td>510.00</td>
+      <td>510.0</td>
+      <td>510.00</td>
+      <td>510.0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">64000.0</th>
+      <th>64.0</th>
+      <td>1.0</td>
+      <td>636.000000</td>
+      <td>NaN</td>
+      <td>636.0</td>
+      <td>636.00</td>
+      <td>636.0</td>
+      <td>636.00</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>96.0</th>
+      <td>1.0</td>
+      <td>915.000000</td>
+      <td>NaN</td>
+      <td>915.0</td>
+      <td>915.00</td>
+      <td>915.0</td>
+      <td>915.00</td>
+      <td>915.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <td>2.0</td>
+      <td>1147.000000</td>
+      <td>4.242641</td>
+      <td>1144.0</td>
+      <td>1145.50</td>
+      <td>1147.0</td>
+      <td>1148.50</td>
+      <td>1150.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>72 rows × 8 columns</p>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP varies with MYCT & CACH?
+prp.groupby([mydata.MYCT, mydata.CACH]).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MYCT</th>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">17.0</th>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>100.000000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>32.0</th>
+      <td>1.0</td>
+      <td>133.000000</td>
+      <td>NaN</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">23.0</th>
+      <th>64.0</th>
+      <td>3.0</td>
+      <td>497.333333</td>
+      <td>134.693479</td>
+      <td>367.0</td>
+      <td>428.0</td>
+      <td>489.0</td>
+      <td>562.5</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>1144.000000</td>
+      <td>NaN</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+    </tr>
+    <tr>
+      <th>25.0</th>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>49.000000</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>49.0</td>
+      <td>49.0</td>
+      <td>49.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">900.0</th>
+      <th>0.0</th>
+      <td>3.0</td>
+      <td>19.666667</td>
+      <td>15.011107</td>
+      <td>11.0</td>
+      <td>11.0</td>
+      <td>11.0</td>
+      <td>24.0</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th>4.0</th>
+      <td>1.0</td>
+      <td>18.000000</td>
+      <td>NaN</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>22.000000</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>1100.0</th>
+      <th>0.0</th>
+      <td>2.0</td>
+      <td>10.000000</td>
+      <td>4.242641</td>
+      <td>7.0</td>
+      <td>8.5</td>
+      <td>10.0</td>
+      <td>11.5</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th>1500.0</th>
+      <th>0.0</th>
+      <td>2.0</td>
+      <td>15.000000</td>
+      <td>4.242641</td>
+      <td>12.0</td>
+      <td>13.5</td>
+      <td>15.0</td>
+      <td>16.5</td>
+      <td>18.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>119 rows × 8 columns</p>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP varies with MYCT, MMIN & CACH?
+prp.groupby([mydata.MYCT, mydata.MMIN, mydata.CACH]).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MYCT</th>
+      <th>MMIN</th>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">17.0</th>
+      <th rowspan="2" valign="top">4000.0</th>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>100.000000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>32.0</th>
+      <td>1.0</td>
+      <td>133.000000</td>
+      <td>NaN</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">23.0</th>
+      <th>16000.0</th>
+      <th>64.0</th>
+      <td>3.0</td>
+      <td>497.333333</td>
+      <td>134.693479</td>
+      <td>367.0</td>
+      <td>428.0</td>
+      <td>489.0</td>
+      <td>562.5</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>32000.0</th>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>1144.000000</td>
+      <td>NaN</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+    </tr>
+    <tr>
+      <th>25.0</th>
+      <th>1310.0</th>
+      <th>131.0</th>
+      <td>2.0</td>
+      <td>321.000000</td>
+      <td>66.468037</td>
+      <td>274.0</td>
+      <td>297.5</td>
+      <td>321.0</td>
+      <td>344.5</td>
+      <td>368.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">900.0</th>
+      <th>1000.0</th>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>22.000000</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>2000.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>37.000000</td>
+      <td>NaN</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1100.0</th>
+      <th>512.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>7.000000</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>768.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>13.000000</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th>1500.0</th>
+      <th>768.0</th>
+      <th>0.0</th>
+      <td>2.0</td>
+      <td>15.000000</td>
+      <td>4.242641</td>
+      <td>12.0</td>
+      <td>13.5</td>
+      <td>15.0</td>
+      <td>16.5</td>
+      <td>18.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 8 columns</p>
+</div>
+
+
+
+
+```python
+# Check whether the average PRP varies with  MYCT, MMIN, MMAX & CACH?
+prp.groupby([mydata.MYCT, mydata.MMIN, mydata.MMAX, mydata.CACH]).describe()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>MYCT</th>
+      <th>MMIN</th>
+      <th>MMAX</th>
+      <th>CACH</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">17.0</th>
+      <th rowspan="2" valign="top">4000.0</th>
+      <th rowspan="2" valign="top">16000.0</th>
+      <th>8.0</th>
+      <td>1.0</td>
+      <td>100.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>32.0</th>
+      <td>1.0</td>
+      <td>133.0</td>
+      <td>NaN</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+      <td>133.0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">23.0</th>
+      <th rowspan="2" valign="top">16000.0</th>
+      <th>32000.0</th>
+      <th>64.0</th>
+      <td>2.0</td>
+      <td>428.0</td>
+      <td>86.267027</td>
+      <td>367.0</td>
+      <td>397.5</td>
+      <td>428.0</td>
+      <td>458.5</td>
+      <td>489.0</td>
+    </tr>
+    <tr>
+      <th>64000.0</th>
+      <th>64.0</th>
+      <td>1.0</td>
+      <td>636.0</td>
+      <td>NaN</td>
+      <td>636.0</td>
+      <td>636.0</td>
+      <td>636.0</td>
+      <td>636.0</td>
+      <td>636.0</td>
+    </tr>
+    <tr>
+      <th>32000.0</th>
+      <th>64000.0</th>
+      <th>128.0</th>
+      <td>1.0</td>
+      <td>1144.0</td>
+      <td>NaN</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+      <td>1144.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>900.0</th>
+      <th>2000.0</th>
+      <th>4000.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1100.0</th>
+      <th>512.0</th>
+      <th>1500.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>NaN</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>768.0</th>
+      <th>2000.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">1500.0</th>
+      <th rowspan="2" valign="top">768.0</th>
+      <th>1000.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>12.0</td>
+      <td>NaN</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>2000.0</th>
+      <th>0.0</th>
+      <td>1.0</td>
+      <td>18.0</td>
+      <td>NaN</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+      <td>18.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>178 rows × 8 columns</p>
+</div>
+
+
+
+
+```python
+#  Compute the aggregate average  PRP varies with  MYCT, MMIN, MMAX & CACH.
+mydata.boxplot(column='PRP', by=['MYCT','MMIN','MMAX','CACH'])
+plt.title("Box Plot")
+plt.ylabel('PRP')
+plt.show()
+```
+
+
+    
+![png](output_11_0.png)
+    
+
