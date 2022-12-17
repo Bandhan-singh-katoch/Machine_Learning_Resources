@@ -1,4 +1,4 @@
-# Machine Learning :-
+# Useful websites for learning ML :-
 https://codebasics.io/courses/machine-learning-for-beginners
 
 https://developers.google.com/machine-learning/crash-course/
